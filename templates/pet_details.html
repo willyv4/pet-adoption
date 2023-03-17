@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %} {% block content
+%}
+<section class="card mt-5">
+<div class="card mt-5" style="margin-left: auto; margin-right: auto; min-width: 400px;">
+  <div class="row justify-content-center">
+    <img
+      src="{{pet.photo_url}}"
+      alt="image of {{pet.species}}"
+      style="width: 300px"
+
+    />
+      <div class="card-body mt-4 mr-3">
+        <h3 class="card-title">{{pet.name}}</h3>
+        <h5 class="card-subtitle mb-2 text-muted">
+          {{pet.species}} - age: {{pet.age}}
+        </h5>
+        <p class="card-text">{{pet.notes}}</p>
+        {% if pet.available %}
+        <h5 class="card-subtitle mb-2 text-success">
+          {{pet.name}} is available
+        </h5>
+        {% else %}
+        <h5 class="card-subtitle mb-2 text-muted">
+          {{pet.name}} is not available
+        </h5>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h1 class="display-4 text-center">Edit {{pet.name}}</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form method="POST" class="mt-5">
+        {{form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+        'hidden'%}
+        <div class="form-group">
+          {{field.label}} {{field(class_="form-control")}}{% for err in
+          field.errors %}
+          <small class="form-text text-danger"> {{err}} </small>
+          {% endfor %} {% endfor %}
+        </div>
+        <button class="btn btn-success btn-sm">Save Edits</button>
+        <a href="/" class="btn btn-warning btn-sm">Go back</a>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %} Home {% endblock %} {% block content
+%}
+<h1 class="mt-5">Pets</h1>
+<div class="grid text-center"></div>
+{% for pet in pets%}
+
+<div class="g-col g-col card" style="width: 18rem">
+  <img
+    src="{{pet.photo_url}}"
+    alt="image of {{pet.species}}"
+    class="card-img-top"
+  />
+  <div class="card-body">
+    <a href="/{{pet.id}}"><h4 class="card-title">{{pet.name}}</h4></a>
+    <h5 class="card-subtitle mb-2 text-muted">
+      {{pet.species}} - age: {{pet.age}}
+    </h5>
+    <p class="card-text">{{pet.notes}}</p>
+    {% if pet.available %}
+    <h5 class="card-subtitle mb-2 text-success">{{pet.name}} is available</h5>
+    {% else %}
+    <h5 class="card-subtitle mb-2 text-muted">{{pet.name}} is not available</h5>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
